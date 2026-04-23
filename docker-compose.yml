@@ -1,6 +1,6 @@
 services:
   terminaltom:
-    build: .
+    image: smithtom6304/terminaltom:0.1.0
     container_name: terminaltom
     restart: unless-stopped
     ports:
