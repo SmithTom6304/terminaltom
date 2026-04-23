@@ -1,0 +1,7 @@
+services:
+  terminaltom:
+    build: .
+    container_name: terminaltom
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"   # only exposed to localhost; Nginx proxies in
