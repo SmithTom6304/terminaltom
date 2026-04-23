@@ -1,8 +1,8 @@
 ---
 title: "go-fish"
 date: 2025-01-15
-tags: ["go", "web", "game"]
-description: "A web-based card game written in Go. Deployed at terminaltom.com/go-fish."
+tags: ["rust", "web", "game"]
+description: "A web-based card game written in Rust. Deployed at terminaltom.com/go-fish."
 ---
 
 A terminal-based implementation of the card game Go Fish, written in Rust with a WebSocket backend. 
