@@ -6,6 +6,7 @@
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.subtitle }}{{ end }}" />
   {{ if .Params.canonicalUrl }}<link rel="canonical" href="{{ .Params.canonicalUrl }}" />{{ end }}
+  {{ with .Site.Params.meta.favicon }}<link rel="icon" href="{{ . }}" type="image/svg+xml" />{{ end }}
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 72" width="96" height="72">
+  <title>Terminal Tom</title>
+  <defs>
+    <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="3" width="1" height="1" fill="black" opacity="0.15"></rect>
+    </pattern>
+    <mask id="mark">
+      <path fill="white" fill-rule="evenodd" d="M5,0 H91 Q96,0 96,5 V67 Q96,72 91,72 H5 Q0,72 0,67 V5 Q0,0 5,0 Z&#xA;           M10,10 H86 V29 H60 V72 H36 V29 H10 Z"></path>
+    </mask>
+  </defs>
+
+  
+  <path fill="#c8922a" fill-rule="evenodd" d="&#xA;      M5,0 H91 Q96,0 96,5 V67 Q96,72 91,72 H5 Q0,72 0,67 V5 Q0,0 5,0 Z&#xA;      M10,10 H86 V29 H60 V72 H36 V29 H10 Z&#xA;    "></path>
+
+  
+  <rect width="96" height="72" fill="url(#scanlines)" mask="url(#mark)"></rect>
+</svg>

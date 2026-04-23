@@ -9,5 +9,8 @@ paginate = 10
   email = "smith1999tom@gmail.com"
   github = "https://github.com/SmithTom6304"
 
+[params.meta]
+  favicon = "/favicon.svg"
+
 [taxonomies]
   tag = "tags"
