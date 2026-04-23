@@ -5,7 +5,7 @@ theme = "terminal"
 paginate = 10
 
 [params]
-  subtitle = "engineer / tinkerer / documenter of things"
+  subtitle = "engineer / tinkerer / crossword lover"
   email = "smith1999tom@gmail.com"
   github = "https://github.com/SmithTom6304"
 
