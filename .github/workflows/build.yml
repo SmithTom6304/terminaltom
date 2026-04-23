@@ -28,6 +28,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/terminaltom:${{ inputs.tag }}
+          tags: smithtom6304/terminaltom:${{ inputs.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
