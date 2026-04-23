@@ -157,12 +157,12 @@
       });
     });
 
-    markVisited();
     var isHomePage = !!document.getElementById('about-content');
     if (isHomePage) {
       if (shouldAnimate()) startBoot();
       else skipBoot();
     }
+    markVisited();
   </script>
 </body>
 </html>
