@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.subtitle }}{{ end }}" />
+  {{ if .Params.canonicalUrl }}<link rel="canonical" href="{{ .Params.canonicalUrl }}" />{{ end }}
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="site-wrap">
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-title">
+          <div class="prompt-line" id="header-prompt">tom@terminaltom:~$ whoami</div>
+          <a href="/" class="site-title{{ if .IsHome }} boot-hidden{{ end }}" id="site-title">{{ .Site.Title }}</a>
+          <span class="site-subtitle{{ if .IsHome }} boot-hidden{{ end }}" id="site-subtitle">// {{ .Site.Params.subtitle }}</span>
+        </div>
+        <nav class="site-nav{{ if .IsHome }} boot-hidden{{ end }}" id="site-nav">
+          <a href="/"{{ if .IsHome }} class="active"{{ end }}>[home]</a>
+          <a href="/posts/"{{ if eq .Section "posts" }} class="active"{{ end }}>[blog]</a>
+          <a href="/projects/"{{ if eq .Type "projects" }} class="active"{{ end }}>[projects]</a>
+          <a href="/cv/"{{ if eq .Type "cv" }} class="active"{{ end }}>[cv]</a>
+        </nav>
+      </div>
+    </header>
+    <div class="header-rule{{ if .IsHome }} boot-hidden{{ end }}" id="header-rule"></div>
+
+    <main class="site-main" id="site-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer{{ if .IsHome }} boot-hidden{{ end }}" id="site-footer">
+      <span><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></span>
+      <span>
+        {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">github</a> &middot; {{ end }}
+        <a href="/posts/index.xml">rss</a>
+        &middot; <a href="#" id="anim-toggle" title="Toggle boot animation for future visits"></a>
+      </span>
+    </footer>
+
+  </div>
+
+  <script>
+    const VISITED_KEY  = 'tt-visited';
+    const OVERRIDE_KEY = 'tt-boot-override';
+
+    function getOverride() { return localStorage.getItem(OVERRIDE_KEY); }
+    function setOverride(val) {
+      if (val === null) localStorage.removeItem(OVERRIDE_KEY);
+      else localStorage.setItem(OVERRIDE_KEY, val);
+    }
+    function hasVisited() { return !!localStorage.getItem(VISITED_KEY); }
+    function markVisited() { localStorage.setItem(VISITED_KEY, '1'); }
+
+    function shouldAnimate() {
+      const override = getOverride();
+      if (override === 'on')  return true;
+      if (override === 'off') return false;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+      return !hasVisited();
+    }
+
+    function reveal(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('boot-hidden');
+      el.classList.add('boot-visible');
+    }
+
+    function typeText(el, text, delay, speed) {
+      delay = delay || 0;
+      speed = speed || 38;
+      return new Promise(function(resolve) {
+        setTimeout(function() {
+          var i = 0;
+          el.textContent = '';
+          el.classList.add('typing');
+          var interval = setInterval(function() {
+            el.textContent += text[i];
+            i++;
+            if (i >= text.length) {
+              clearInterval(interval);
+              el.classList.remove('typing');
+              resolve();
+            }
+          }, speed);
+        }, delay);
+      });
+    }
+
+    var titleEl   = document.querySelector('.site-title');
+    var TITLE_TEXT = 'TERMINAL TOM';
+
+    function startBoot() {
+      var hp = document.getElementById('header-prompt');
+
+      titleEl.textContent = '';
+      ['site-title','site-subtitle','site-nav','about-content','home-recent','site-footer'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add('boot-hidden');
+        el.classList.remove('boot-visible');
+      });
+      hp.textContent = '';
+
+      typeText(hp, 'tom@terminaltom:~$ whoami', 300, 36)
+        .then(function() { return new Promise(function(res) { setTimeout(res, 500); }); })
+        .then(function() {
+          reveal('site-title');
+          return typeText(titleEl, TITLE_TEXT, 0, 80);
+        })
+        .then(function() { return new Promise(function(res) { setTimeout(res, 500); }); })
+        .then(function() {
+          reveal('header-rule');
+          reveal('site-subtitle');
+          reveal('site-nav');
+          reveal('about-prompt');
+          reveal('about-content');
+          reveal('home-recent');
+          reveal('site-footer');
+        });
+    }
+
+    function skipBoot() {
+      titleEl.textContent = TITLE_TEXT;
+      var hp = document.getElementById('header-prompt');
+      var ap = document.getElementById('about-prompt');
+      if (hp) hp.textContent = 'tom@terminaltom:~$ whoami';
+      if (ap) ap.textContent = 'tom@terminaltom:~$ cat about.txt';
+      ['site-title','site-subtitle','site-nav','about-content','home-recent','site-footer'].forEach(reveal);
+    }
+
+    function updateAnimToggle() {
+      var el = document.getElementById('anim-toggle');
+      if (!el) return;
+      var override = getOverride();
+      if (override === 'on')       el.textContent = '[boot: always]';
+      else if (override === 'off') el.textContent = '[boot: never]';
+      else                         el.textContent = '[boot: auto]';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAnimToggle();
+      var el = document.getElementById('anim-toggle');
+      if (!el) return;
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        var override = getOverride();
+        if (override === null)       setOverride('on');
+        else if (override === 'on')  setOverride('off');
+        else                         setOverride(null);
+        updateAnimToggle();
+      });
+    });
+
+    markVisited();
+    var isHomePage = !!document.getElementById('about-content');
+    if (isHomePage) {
+      if (shouldAnimate()) startBoot();
+      else skipBoot();
+    }
+  </script>
+</body>
+</html>

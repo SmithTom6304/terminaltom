@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="single-post">
+  <header class="post-header">
+    <div class="prompt-line">tom@terminaltom:~$ cat posts/{{ .File.BaseFileName }}.md</div>
+    <h1 class="post-heading">{{ .Title }}</h1>
+    <div class="post-meta">
+      <time>{{ .Date.Format "2006-01-02" }}</time>
+      {{ with .Params.tags }}
+        &nbsp;&middot;&nbsp;
+        {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+      {{ end }}
+      {{ with .Params.canonicalUrl }}
+        &nbsp;&middot;&nbsp;<span class="canonical-note">also on <a href="{{ . }}" target="_blank" rel="noopener">original</a></span>
+      {{ end }}
+    </div>
+  </header>
+
+  <div class="post-body">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    <a href="/posts/" class="back-link">[← back to posts]</a>
+  </footer>
+</article>
+{{ end }}

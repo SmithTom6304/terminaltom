@@ -1,0 +1,13 @@
+baseURL = "https://terminaltom.com/"
+languageCode = "en-gb"
+title = "TERMINAL TOM"
+theme = "terminal"
+paginate = 10
+
+[params]
+  subtitle = "engineer / tinkerer / documenter of things"
+  email = "smith1999tom@gmail.com"
+  github = "https://github.com/SmithTom6304"
+
+[taxonomies]
+  tag = "tags"

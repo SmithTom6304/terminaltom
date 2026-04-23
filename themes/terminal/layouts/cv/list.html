@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="cv-page">
+  <div class="prompt-line">tom@terminaltom:~$ cat cv.json</div>
+
+  <div class="cv-section-heading">experience</div>
+
+  <div class="cv-row">
+    <span class="cv-year">2025–present</span>
+    <span class="cv-detail"><strong>Software Engineer</strong> <em>@ Angstrom</em> — Backend development of sports betting markets</span>
+  </div>
+  <div class="cv-row">
+    <span class="cv-year">2021–2025</span>
+    <span class="cv-detail"><strong>Software Engineer</strong> <em>@ GameMaker</em> — IDE developor, DevOps, CI/CD</span>
+  </div>
+
+  <div class="cv-section-heading">skills</div>
+
+  <div class="cv-row">
+    <span class="cv-year">languages</span>
+    <span class="cv-detail">C#, Rust, Python</span>
+  </div>
+  <div class="cv-row">
+    <span class="cv-year">infra</span>
+    <span class="cv-detail">AWS, Linux, Docker, Nginx, GitHub Actions</span>
+  </div>
+  <div class="cv-row">
+    <span class="cv-year">interests</span>
+    <span class="cv-detail">programming, cooking, plants</span>
+  </div>
+
+  <div class="cv-section-heading">education</div>
+
+  <div class="cv-row">
+    <span class="cv-year">2017–2021</span>
+    <span class="cv-detail"><strong>First Class BSc Computer Science</strong> <em>@ University of Dundee</em></span>
+  </div>
+
+  <div class="cv-section-heading">contact</div>
+
+  <div class="cv-row">
+    <span class="cv-year">email</span>
+    <span class="cv-detail"><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></span>
+  </div>
+  <div class="cv-row">
+    <span class="cv-year">github</span>
+    <span class="cv-detail"><a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">{{ .Site.Params.github }}</a></span>
+  </div>
+</section>
+{{ end }}

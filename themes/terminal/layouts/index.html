@@ -1,0 +1,26 @@
+{{ define "main" }}
+<section class="home-intro">
+  <div class="prompt-line boot-hidden" id="about-prompt">tom@terminaltom:~$ cat about.txt</div>
+  <div class="content-block boot-hidden" id="about-content">
+    {{ .Content }}
+  </div>
+</section>
+
+<section class="home-recent boot-hidden" id="home-recent">
+  <div class="section-label">recent posts</div>
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ range first 5 $posts }}
+  <article class="post-entry">
+    <a class="post-entry-link" href="{{ .Permalink }}">
+      <time class="post-date">{{ .Date.Format "2006-01-02" }}</time>
+      <span class="post-title">{{ .Title }}</span>
+      <div class="post-excerpt">{{ .Summary | plainify | truncate 120 }}</div>
+      {{ with .Params.tags }}
+      <div class="tag-list">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>
+      {{ end }}
+    </a>
+  </article>
+  {{ end }}
+  <a href="/posts/" class="more-link">[view all posts →]</a>
+</section>
+{{ end }}
