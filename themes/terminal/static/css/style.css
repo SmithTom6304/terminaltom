@@ -192,6 +192,13 @@ a:hover { color: var(--accent-hover); }
   letter-spacing: 0.3px;
 }
 
+.error-output {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-top: 6px;
+  margin-bottom: 32px;
+}
+
 
 /* ── Section label ── */
 .section-label {

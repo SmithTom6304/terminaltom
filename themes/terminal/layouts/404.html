@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="single-post">
+  <header class="post-header">
+    <div class="prompt-line" id="err-prompt">tom@terminaltom:~$ cat </div>
+    <div class="error-output" id="err-output">cat: : No such file or directory</div>
+  </header>
+
+  <div class="post-body">
+    <p>This page doesn't exist. It may have moved, or it may never have existed at all.</p>
+  </div>
+</section>
+<script>
+  var path = window.location.pathname;
+  document.getElementById('err-prompt').textContent  = 'tom@terminaltom:~$ cat ' + path;
+  document.getElementById('err-output').textContent  = 'cat: ' + path + ': No such file or directory';
+</script>
+{{ end }}
